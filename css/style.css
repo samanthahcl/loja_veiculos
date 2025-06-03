@@ -1,0 +1,467 @@
+/* Importação de fontes:
+ * Importa a fonte 'Roboto' do Google Fonts nas variações de peso 400 (normal) e 700 (negrito).
+ * Garante que a fonte esteja disponível para uso em todo o site.
+ */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* Variáveis CSS (Custom Properties):
+ * O bloco ':root' define variáveis globais que podem ser reutilizadas em todo o CSS.
+ * Isso facilita a padronização e a mudança rápida de cores e outros valores.
+ */
+:root {
+    --primary-color: #ff0000; /* Cor principal da marca (vermelho vibrante) */
+    --secondary-color: #ff0000; /* Cor secundária, usada para hover ou detalhes (igual à primária neste caso) */
+    --text-color: #333; /* Cor padrão para o texto principal */
+    --light-gray: #f8f9fa; /* Cor de fundo para seções claras ou corpo da página */
+    --dark-gray: #6c757d; /* Cor de fundo para a barra superior ou elementos escuros */
+    --border-color: #dee2e6; /* Cor padrão para bordas e divisores */
+    --green-whatsapp: #06a03f; /* Verde específico para o botão do WhatsApp */
+
+    /* Cores para o gradiente do ícone do Instagram:
+     * Definem os pontos de cor para criar o efeito de gradiente característico do Instagram.
+     */
+    --instagram-gradient-start: #feda75;
+    --instagram-gradient-middle1: #fa7e1e;
+    --instagram-gradient-middle2: #d62976;
+    --instagram-gradient-end: #962fbf;
+    --instagram-gradient-end2: #4f5bd5;
+}
+
+/* Estilos Globais do Corpo da Página:
+ * Aplicam configurações básicas de fonte, margens e cores a todo o documento HTML.
+ */
+body {
+    font-family: 'Roboto', sans-serif; /* Define a fonte principal */
+    margin: 0; /* Remove margens padrão do navegador */
+    padding: 0; /* Remove preenchimento padrão do navegador */
+    background-color: var(--light-gray); /* Cor de fundo da página */
+    color: var(--text-color); /* Cor padrão do texto */
+}
+
+/* Barra Superior (Top Bar):
+ * Estiliza a barra no topo da página que contém informações de contato e mídias sociais.
+ */
+.top-bar {
+    background-color: var(--dark-gray); /* Fundo cinza escuro */
+    color: white; /* Cor do texto branca */
+    padding: 10px 20px; /* Preenchimento interno */
+    display: flex; /* Usa Flexbox para organizar os itens em linha */
+    justify-content: space-between; /* Espaça os itens nas extremidades */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    font-size: 0.9em; /* Tamanho da fonte um pouco menor */
+}
+
+/* Informações de Contato na Top Bar:
+ * Estilo para os spans dentro da seção de informações de contato.
+ */
+.top-bar .contact-info span {
+    margin-right: 20px; /* Espaçamento entre os itens de contato */
+}
+
+/* Contêiner dos Ícones de Mídias Sociais na Top Bar:
+ * Estiliza a div que agrupa os links de redes sociais.
+ */
+.social-media {
+    display: flex; /* Usa Flexbox para alinhar os ícones */
+    align-items: center; /* Alinha os ícones verticalmente ao centro */
+    gap: 15px; /* Espaçamento entre os ícones (se houver mais de um) */
+}
+
+/* Estilo Base para o Link do Instagram na Top Bar:
+ * Aplica estilos ao link específico do Instagram.
+ */
+.social-media .instagram-link {
+    font-size: 2.2em; /* Torna o ícone do Instagram maior */
+    text-decoration: none; /* Remove o sublinhado padrão do link */
+    display: flex; /* Usa Flexbox para centralizar o ícone Font Awesome dentro do seu próprio contêiner */
+    align-items: center; /* Alinha o ícone verticalmente */
+    justify-content: center; /* Alinha o ícone horizontalmente */
+    width: 45px; /* Largura fixa para o contêiner do ícone */
+    height: 45px; /* Altura fixa para o contêiner do ícone */
+    border-radius: 12px; /* Cantos arredondados, similar ao logo do Instagram */
+    position: relative; /* Necessário para posicionar o gradiente com 'absolute' */
+    overflow: hidden; /* Esconde qualquer parte do gradiente que ultrapasse as bordas arredondadas */
+    z-index: 1; /* Garante que o ícone esteja acima do pseudo-elemento de gradiente */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Adiciona uma sombra para destaque */
+    transition: transform 0.2s ease-in-out; /* Transição suave para o efeito hover */
+}
+
+/* Pseudo-elemento para o Efeito de Gradiente Colorido do Instagram:
+ * Cria um fundo com gradiente para simular as cores do logo do Instagram.
+ */
+.social-media .instagram-link::before {
+    content: ''; /* Propriedade obrigatória para pseudo-elementos */
+    position: absolute; /* Posiciona o elemento em relação ao seu pai (.instagram-link) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0; /* Faz com que o pseudo-elemento ocupe todo o espaço do pai */
+    z-index: -1; /* Coloca o gradiente atrás do ícone */
+    background: linear-gradient( /* Define o gradiente de cores */
+        45deg, /* Ângulo do gradiente */
+        var(--instagram-gradient-start),
+        var(--instagram-gradient-middle1),
+        var(--instagram-gradient-middle2),
+        var(--instagram-gradient-end),
+        var(--instagram-gradient-end2)
+    );
+    opacity: 1; /* Garante que o gradiente seja totalmente visível */
+    border-radius: 12px; /* Aplica os mesmos cantos arredondados do contêiner */
+}
+
+/* Estilo do Ícone Font Awesome dentro do Link do Instagram:
+ * Garante que o ícone seja branco para contrastar com o gradiente.
+ */
+.social-media .instagram-link i {
+    color: white; /* Cor do ícone branca */
+    font-size: 1em; /* Tamanho do ícone ajustado ao contêiner (.instagram-link) */
+}
+
+/* Efeito ao Passar o Mouse (Hover) no Ícone do Instagram:
+ * Adiciona um leve aumento de escala quando o usuário passa o mouse.
+ */
+.social-media .instagram-link:hover {
+    transform: scale(1.1); /* Aumenta o tamanho em 10% */
+}
+
+/* Navegação Principal (Main Navigation):
+ * Estiliza a barra de navegação principal, que contém o logo e os links.
+ */
+.main-nav {
+    background-color: white; /* Fundo branco */
+    padding: 15px 20px; /* Preenchimento interno */
+    display: flex; /* Usa Flexbox para alinhar logo, links e pesquisa */
+    justify-content: space-between; /* Espaça os grupos de itens */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Sombra suave para profundidade */
+}
+
+/* Logo na Navegação Principal:
+ * Estiliza o contêiner do logo e do nome da loja.
+ */
+.main-nav .logo {
+    display: flex; /* Usa Flexbox para alinhar imagem e texto do logo */
+    align-items: center; /* Alinha verticalmente */
+}
+
+/* Imagem do Logo: */
+.main-nav .logo img {
+    height: 60px; /* Altura fixa da imagem do logo */
+    margin-right: 10px; /* Espaçamento à direita da imagem */
+}
+
+/* Texto do Logo: */
+.main-nav .logo span {
+    font-weight: bold; /* Texto em negrito */
+    font-size: 1.2em; /* Tamanho da fonte */
+    color: var(--primary-color); /* Cor do texto do logo */
+}
+
+/* Links de Navegação: */
+.main-nav .nav-links {
+    list-style: none; /* Remove marcadores de lista */
+    margin: 0; /* Remove margens padrão */
+    padding: 0; /* Remove preenchimento padrão */
+    display: flex; /* Usa Flexbox para alinhar os links horizontalmente */
+}
+
+.main-nav .nav-links li {
+    margin-right: 30px; /* Espaçamento entre os itens de navegação */
+}
+
+.main-nav .nav-links a {
+    text-decoration: none; /* Remove sublinhado dos links */
+    color: var(--text-color); /* Cor padrão do texto do link */
+    font-weight: bold; /* Texto em negrito */
+    transition: color 0.3s ease; /* Transição suave na cor ao passar o mouse */
+}
+
+.main-nav .nav-links a:hover {
+    color: var(--primary-color); /* Altera a cor ao passar o mouse */
+}
+
+/* Seção de Pesquisa e Comparação na Navegação: */
+.main-nav .search-compare {
+    display: flex; /* Usa Flexbox para alinhar input e botão de pesquisa */
+    align-items: center; /* Alinha verticalmente */
+}
+
+/* Campo de Input da Pesquisa: */
+.main-nav .search-compare input[type="text"] {
+    border: 1px solid var(--border-color); /* Borda fina */
+    padding: 8px 12px; /* Preenchimento interno */
+    border-radius: 4px; /* Cantos arredondados */
+    margin-right: 10px; /* Espaçamento à direita do input */
+}
+
+/* Botão de Pesquisa: */
+.main-nav .search-compare button {
+    background-color: var(--primary-color); /* Cor de fundo do botão */
+    color: white; /* Cor do texto branca */
+    border: none; /* Sem borda */
+    padding: 8px 12px; /* Preenchimento interno */
+    border-radius: 4px; /* Cantos arredondados */
+    cursor: pointer; /* Muda o cursor ao passar por cima */
+    transition: background-color 0.3s ease; /* Transição suave na cor de fundo */
+}
+
+.main-nav .search-compare button:hover {
+    background-color: var(--secondary-color); /* Altera a cor de fundo ao passar o mouse */
+}
+
+/* Conteúdo Principal (Main Content Area):
+ * Estilos gerais para a área de conteúdo abaixo do cabeçalho.
+ */
+.content {
+    padding: 20px; /* Preenchimento interno */
+    max-width: 1200px; /* Largura máxima do conteúdo */
+    margin: 20px auto; /* Centraliza o conteúdo e adiciona margem superior/inferior */
+}
+
+/* Seção de Boas-Vindas: */
+.welcome-section {
+    text-align: center; /* Centraliza o texto */
+    margin-bottom: 30px; /* Margem inferior */
+}
+
+.welcome-section h1 {
+    font-size: 2.2em; /* Tamanho do título */
+    color: var(--primary-color); /* Cor do título */
+    margin-bottom: 20px; /* Margem inferior */
+}
+
+/* Opções de Pesquisa (Botões 'Usado'/'Pesquisar'): */
+.search-options {
+    display: flex; /* Usa Flexbox para alinhar os botões */
+    justify-content: center; /* Centraliza os botões */
+    gap: 15px; /* Espaçamento entre os botões */
+}
+
+.search-options button {
+    background-color: white; /* Fundo branco */
+    border: 1px solid var(--border-color); /* Borda fina */
+    padding: 10px 25px; /* Preenchimento interno */
+    border-radius: 5px; /* Cantos arredondados */
+    cursor: pointer; /* Cursor de mão */
+    font-size: 1.1em; /* Tamanho da fonte */
+    font-weight: bold; /* Negrito */
+    color: var(--text-color); /* Cor do texto */
+    transition: all 0.3s ease; /* Transição suave para todas as propriedades */
+}
+
+/* Estilo para o botão ativo ou ao passar o mouse: */
+.search-options button.active,
+.search-options button:hover {
+    background-color: var(--primary-color); /* Fundo vermelho */
+    color: white; /* Texto branco */
+    border-color: var(--primary-color); /* Borda vermelha */
+}
+
+/* Listagem de Carros:
+ * Estilo para o grid onde os cartões de carro serão exibidos.
+ */
+.car-listings {
+    display: grid; /* Usa Grid para criar um layout de colunas */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Colunas flexíveis com largura mínima de 280px */
+    gap: 20px; /* Espaçamento entre os itens do grid */
+}
+
+/* Cartão Individual de Carro: */
+.car-card {
+    background-color: white; /* Fundo branco */
+    border: 1px solid var(--border-color); /* Borda fina */
+    border-radius: 8px; /* Cantos arredondados */
+    overflow: hidden; /* Esconde o conteúdo que ultrapassar as bordas */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05); /* Sombra suave */
+    transition: transform 0.2s ease-in-out; /* Transição suave para o efeito hover */
+}
+
+.car-card:hover {
+    transform: translateY(-5px); /* Move o cartão ligeiramente para cima ao passar o mouse */
+}
+
+/* Imagem do Carro no Cartão: */
+.car-card img {
+    width: 100%; /* Ocupa 100% da largura do cartão */
+    height: 180px; /* Altura fixa da imagem */
+    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer, cortando o excesso */
+    border-bottom: 1px solid var(--border-color); /* Borda inferior */
+}
+
+/* Detalhes do Carro no Cartão: */
+.car-card .car-details {
+    padding: 15px; /* Preenchimento interno */
+}
+
+/* Título do Carro (Modelo): */
+.car-card h3 {
+    margin-top: 0; /* Remove margem superior padrão */
+    margin-bottom: 10px; /* Margem inferior */
+    font-size: 1.2em; /* Tamanho do título */
+    color: var(--primary-color); /* Cor do título */
+}
+
+/* Parágrafos de Detalhes (Ano, KM, etc.): */
+.car-card p {
+    margin-bottom: 8px; /* Margem inferior */
+    font-size: 0.95em; /* Tamanho da fonte */
+    color: var(--dark-gray); /* Cor cinza escuro */
+}
+
+/* Preço do Carro: */
+.car-card .price {
+    font-size: 1.4em; /* Tamanho maior para o preço */
+    font-weight: bold; /* Negrito */
+    color: var(--secondary-color); /* Cor secundária (vermelha) */
+    margin-top: 15px; /* Margem superior */
+    display: block; /* Garante que o preço ocupe uma linha inteira */
+}
+
+/* Botões de Ação no Cartão (Ex: "Mais informações"): */
+.car-card .action-buttons {
+    display: flex; /* Usa Flexbox para organizar os botões */
+    justify-content: center; /* Centraliza o(s) botão(ões) */
+    margin-top: 15px; /* Margem superior */
+    padding-top: 15px; /* Preenchimento superior */
+    border-top: 1px dashed var(--border-color); /* Borda tracejada na parte superior */
+}
+
+/* Estilo para o botão "Mais informações" (que é um link com classe .details-whatsapp-btn) */
+.car-card .action-buttons .details-whatsapp-btn {
+    background-color: var(--green-whatsapp); /* Cor de fundo verde do WhatsApp */
+    color: white; /* Cor do texto branca */
+    border: none; /* Sem borda */
+    padding: 8px 12px; /* Espaçamento interno */
+    border-radius: 4px; /* Cantos arredondados */
+    cursor: pointer; /* Cursor de mão */
+    font-size: 0.9em; /* Tamanho da fonte */
+    font-weight: bold; /* Negrito */
+    transition: background-color 0.3s ease; /* Transição suave na cor de fundo */
+    text-decoration: none; /* Remove o sublinhado padrão do link */
+
+    display: flex; /* Para alinhar o ícone e o texto */
+    align-items: center; /* Alinha verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
+    width: 100%; /* Ocupa a largura total do container */
+    box-sizing: border-box; /* Inclui padding na largura total */
+}
+
+/* Efeito hover para o botão "Mais informações" */
+.car-card .action-buttons .details-whatsapp-btn:hover {
+    background-color: #20b054; /* Um tom de verde um pouco mais escuro ao passar o mouse */
+}
+
+/* Espaçamento entre o ícone e o texto no botão "Mais informações" */
+.car-card .action-buttons .details-whatsapp-btn i {
+    margin-right: 8px; /* Espaço à direita do ícone */
+}
+
+/* Botões de Contato Fixos (no canto inferior esquerdo):
+ * Estiliza os botões flutuantes de telefone e WhatsApp.
+ */
+.fixed-contact-buttons {
+    position: fixed; /* Fixa os botões na tela, mesmo ao rolar */
+    bottom: 20px; /* Distância do fundo da tela */
+    left: 20px; /* Distância da esquerda da tela */
+    display: flex; /* Usa Flexbox */
+    flex-direction: column; /* Organiza os botões em coluna */
+    gap: 10px; /* Espaçamento entre os botões */
+    z-index: 1000; /* Garante que os botões fiquem acima de outros elementos */
+}
+
+.fixed-contact-buttons a {
+    display: flex; /* Usa Flexbox para alinhar ícone e texto */
+    align-items: center; /* Alinha verticalmente */
+    padding: 10px 15px; /* Preenchimento interno */
+    border-radius: 50px; /* Deixa os botões com formato de pílula */
+    text-decoration: none; /* Remove sublinhado */
+    color: white; /* Cor do texto branca */
+    font-weight: bold; /* Negrito */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Sombra para destaque */
+    transition: transform 0.2s ease-in-out, background-color 0.3s ease; /* Transições suaves */
+}
+
+.fixed-contact-buttons a i {
+    margin-right: 8px; /* Espaçamento à direita do ícone */
+    font-size: 1.2em; /* Tamanho do ícone */
+}
+
+/* Botão de Telefone Fixo: */
+.fixed-contact-buttons .phone-button {
+    background-color: var(--primary-color); /* Cor de fundo vermelha */
+}
+
+.fixed-contact-buttons .phone-button:hover {
+    background-color: var(--secondary-color); /* Altera a cor de fundo ao passar o mouse */
+    transform: scale(1.05); /* Leve aumento de tamanho */
+}
+
+/* Botão do WhatsApp Fixo (Circular): */
+.fixed-contact-buttons .whatsapp-button {
+    background-color: var(--green-whatsapp); /* Cor de fundo verde do WhatsApp */
+    width: 50px; /* Largura para formar um círculo */
+    height: 50px; /* Altura para formar um círculo */
+    justify-content: center; /* Centraliza o ícone horizontalmente */
+    align-items: center; /* Centraliza o ícone verticalmente */
+    font-size: 1.5em; /* Ícone maior */
+    border-radius: 50%; /* Faz um círculo perfeito */
+    padding: 0; /* Remove padding padrão para melhor controle do círculo */
+}
+
+.fixed-contact-buttons .whatsapp-button i {
+    margin-right: 0; /* Remove margem do ícone para centralizar no círculo */
+}
+
+.fixed-contact-buttons .whatsapp-button:hover {
+    background-color: #20b054; /* Tom de verde mais escuro no hover */
+    transform: scale(1.1); /* Leve aumento de tamanho */
+}
+
+/* Responsividade Básica (Media Queries):
+ * Adapta o layout para diferentes tamanhos de tela, especialmente para dispositivos móveis.
+ */
+@media (max-width: 768px) {
+    /* Navegação Principal em telas menores: */
+    .main-nav {
+        flex-direction: column; /* Itens em coluna */
+        align-items: flex-start; /* Alinha itens ao início */
+    }
+
+    .main-nav .nav-links {
+        flex-direction: column; /* Links em coluna */
+        width: 100%; /* Ocupa a largura total */
+        margin-top: 15px; /* Margem superior */
+    }
+
+    .main-nav .nav-links li {
+        margin-right: 0; /* Remove margem lateral */
+        margin-bottom: 10px; /* Espaçamento entre os links */
+    }
+
+    .main-nav .search-compare {
+        width: 100%; /* Ocupa a largura total */
+        margin-top: 15px; /* Margem superior */
+        justify-content: center; /* Centraliza input e botão */
+    }
+
+    /* Top Bar em telas menores: */
+    .top-bar {
+        flex-direction: column; /* Itens em coluna */
+        align-items: flex-start; /* Alinha itens ao início */
+    }
+
+    .top-bar .contact-info span {
+        margin-bottom: 5px; /* Espaçamento entre as informações de contato */
+    }
+
+    /* Opções de Pesquisa em telas menores: */
+    .search-options {
+        flex-direction: column; /* Botões em coluna */
+    }
+
+    /* Botões de Contato Fixos em telas menores: */
+    .fixed-contact-buttons {
+        left: 10px; /* Ajusta a posição à esquerda */
+        bottom: 10px; /* Ajusta a posição inferior */
+    }
+}
