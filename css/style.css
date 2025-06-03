@@ -51,79 +51,6 @@ body {
     font-size: 0.9em; /* Tamanho da fonte um pouco menor */
 }
 
-/* Informações de Contato na Top Bar:
- * Estilo para os spans dentro da seção de informações de contato.
- */
-.top-bar .contact-info span {
-    margin-right: 20px; /* Espaçamento entre os itens de contato */
-}
-
-/* Contêiner dos Ícones de Mídias Sociais na Top Bar:
- * Estiliza a div que agrupa os links de redes sociais.
- */
-.social-media {
-    display: flex; /* Usa Flexbox para alinhar os ícones */
-    align-items: center; /* Alinha os ícones verticalmente ao centro */
-    gap: 15px; /* Espaçamento entre os ícones (se houver mais de um) */
-}
-
-/* Estilo Base para o Link do Instagram na Top Bar:
- * Aplica estilos ao link específico do Instagram.
- */
-.social-media .instagram-link {
-    font-size: 2.2em; /* Torna o ícone do Instagram maior */
-    text-decoration: none; /* Remove o sublinhado padrão do link */
-    display: flex; /* Usa Flexbox para centralizar o ícone Font Awesome dentro do seu próprio contêiner */
-    align-items: center; /* Alinha o ícone verticalmente */
-    justify-content: center; /* Alinha o ícone horizontalmente */
-    width: 45px; /* Largura fixa para o contêiner do ícone */
-    height: 45px; /* Altura fixa para o contêiner do ícone */
-    border-radius: 12px; /* Cantos arredondados, similar ao logo do Instagram */
-    position: relative; /* Necessário para posicionar o gradiente com 'absolute' */
-    overflow: hidden; /* Esconde qualquer parte do gradiente que ultrapasse as bordas arredondadas */
-    z-index: 1; /* Garante que o ícone esteja acima do pseudo-elemento de gradiente */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Adiciona uma sombra para destaque */
-    transition: transform 0.2s ease-in-out; /* Transição suave para o efeito hover */
-}
-
-/* Pseudo-elemento para o Efeito de Gradiente Colorido do Instagram:
- * Cria um fundo com gradiente para simular as cores do logo do Instagram.
- */
-.social-media .instagram-link::before {
-    content: ''; /* Propriedade obrigatória para pseudo-elementos */
-    position: absolute; /* Posiciona o elemento em relação ao seu pai (.instagram-link) */
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0; /* Faz com que o pseudo-elemento ocupe todo o espaço do pai */
-    z-index: -1; /* Coloca o gradiente atrás do ícone */
-    background: linear-gradient( /* Define o gradiente de cores */
-        45deg, /* Ângulo do gradiente */
-        var(--instagram-gradient-start),
-        var(--instagram-gradient-middle1),
-        var(--instagram-gradient-middle2),
-        var(--instagram-gradient-end),
-        var(--instagram-gradient-end2)
-    );
-    opacity: 1; /* Garante que o gradiente seja totalmente visível */
-    border-radius: 12px; /* Aplica os mesmos cantos arredondados do contêiner */
-}
-
-/* Estilo do Ícone Font Awesome dentro do Link do Instagram:
- * Garante que o ícone seja branco para contrastar com o gradiente.
- */
-.social-media .instagram-link i {
-    color: white; /* Cor do ícone branca */
-    font-size: 1em; /* Tamanho do ícone ajustado ao contêiner (.instagram-link) */
-}
-
-/* Efeito ao Passar o Mouse (Hover) no Ícone do Instagram:
- * Adiciona um leve aumento de escala quando o usuário passa o mouse.
- */
-.social-media .instagram-link:hover {
-    transform: scale(1.1); /* Aumenta o tamanho em 10% */
-}
-
 /* Navegação Principal (Main Navigation):
  * Estiliza a barra de navegação principal, que contém o logo e os links.
  */
@@ -385,18 +312,100 @@ body {
     margin-right: 8px; /* Espaçamento à direita do ícone */
     font-size: 1.2em; /* Tamanho do ícone */
 }
-
-/* Botão de Telefone Fixo: */
-.fixed-contact-buttons .phone-button {
-    background-color: var(--primary-color); /* Cor de fundo vermelha */
+/* Botões de Contato Fixos (no canto inferior esquerdo): */
+.fixed-contact-buttons {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column; /* Organiza os botões em coluna */
+    gap: 10px; /* Espaçamento entre os botões */
+    z-index: 1000;
 }
 
-.fixed-contact-buttons .phone-button:hover {
-    background-color: var(--secondary-color); /* Altera a cor de fundo ao passar o mouse */
-    transform: scale(1.05); /* Leve aumento de tamanho */
+.fixed-contact-buttons a {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px; /* Manter este padding para o WhatsApp */
+    border-radius: 50px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease-in-out, background-color 0.3s ease;
+}
+
+.fixed-contact-buttons a i {
+    margin-right: 8px; /* Mantém a margem para o WhatsApp */
+    font-size: 1.2em;
 }
 
 /* Botão do WhatsApp Fixo (Circular): */
+.fixed-contact-buttons .whatsapp-button {
+    background-color: var(--green-whatsapp);
+    width: 50px;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    border-radius: 50%;
+    padding: 0; /* Remover padding padrão para melhor controle do círculo */
+}
+
+.fixed-contact-buttons .whatsapp-button i {
+    margin-right: 0; /* Remove margem para centralizar no círculo */
+}
+
+.fixed-contact-buttons .whatsapp-button:hover {
+    background-color: #20b054;
+    transform: scale(1.1);
+}
+
+/* NOVO ESTILO: Botão do Instagram Fixo (Círculo com gradiente) */
+.fixed-contact-buttons .instagram-button-fixed {
+    background-color: #e1306c; /* Cor de fallback caso o gradiente não carregue */
+    width: 50px; /* Largura para formar um círculo */
+    height: 50px; /* Altura para formar um círculo */
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em; /* Tamanho do ícone */
+    border-radius: 50%; /* Faz um círculo perfeito */
+    padding: 0; /* Remove padding padrão */
+    position: relative; /* Para o pseudo-elemento */
+    overflow: hidden; /* Para o gradiente não vazar */
+    z-index: 1; /* Garante que o ícone esteja sobre o gradiente */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Sombra para destaque */
+    transition: transform 0.2s ease-in-out;
+}
+
+.fixed-contact-buttons .instagram-button-fixed::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1; /* Fica atrás do ícone */
+    background: linear-gradient(
+        45deg,
+        var(--instagram-gradient-start),
+        var(--instagram-gradient-middle1),
+        var(--instagram-gradient-middle2),
+        var(--instagram-gradient-end),
+        var(--instagram-gradient-end2)
+    );
+    opacity: 1;
+    border-radius: 50%; /* Mesma borda do contêiner para o gradiente */
+}
+
+.fixed-contact-buttons .instagram-button-fixed i {
+    color: white; /* Cor branca para o ícone */
+    margin-right: 0; /* Remove margem para centralizar no círculo */
+}
+
+.fixed-contact-buttons .instagram-button-fixed:hover {
+    transform: scale(1.1); /* Leve aumento de tamanho no hover */
+}
 .fixed-contact-buttons .whatsapp-button {
     background-color: var(--green-whatsapp); /* Cor de fundo verde do WhatsApp */
     width: 50px; /* Largura para formar um círculo */
