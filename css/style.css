@@ -13,7 +13,7 @@
     --secondary-color: #ff0000; /* Cor secundária, usada para hover ou detalhes (igual à primária neste caso) */
     --text-color: #333; /* Cor padrão para o texto principal */
     --light-gray: #f8f9fa; /* Cor de fundo para seções claras ou corpo da página */
-    --dark-gray: #6c757d; /* Cor de fundo para a barra superior ou elementos escuros */
+    --dark-gray: #ff0000; /* Cor de fundo para a barra superior ou elementos escuros */
     --border-color: #dee2e6; /* Cor padrão para bordas e divisores */
     --green-whatsapp: #06a03f; /* Verde específico para o botão do WhatsApp */
 
