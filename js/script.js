@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const carListingsContainer = document.querySelector('.car-listings');
     const filterButtons = document.querySelectorAll('.search-options button');
+    const searchInput = document.getElementById('searchInput'); // NOVO: Seleciona o campo de pesquisa
+    const searchButton = document.getElementById('searchButton'); // NOVO: Seleciona o botão de pesquisa
 
     // Número de WhatsApp da loja (formato internacional: 55 + DDD + Número)
     const storeWhatsappNumber = '5583996510055'; // Ex: 5583996510055 para (83) 99651-0055
@@ -160,13 +162,29 @@ document.addEventListener('DOMContentLoaded', () => {
         },
     ];
 
-    function displayCars(filterType = 'usado') {
+    // Função para exibir carros, agora com um parâmetro de pesquisa opcional
+    function displayCars(filterType = 'todos', searchTerm = '') {
         carListingsContainer.innerHTML = ''; // Limpa a lista existente
 
-        const filteredCars = cars.filter(car => car.type === filterType || filterType === 'todos');
+        let filteredCars = cars;
+
+        // Aplica o filtro por tipo (usado/pesquisar/todos)
+        if (filterType !== 'todos') {
+            filteredCars = filteredCars.filter(car => car.type === filterType);
+        }
+
+        // Aplica o filtro de pesquisa se houver um termo
+        if (searchTerm) {
+            const lowerCaseSearchTerm = searchTerm.toLowerCase().trim();
+            filteredCars = filteredCars.filter(car =>
+                car.title.toLowerCase().includes(lowerCaseSearchTerm) ||
+                car.details.toLowerCase().includes(lowerCaseSearchTerm) ||
+                car.price.toLowerCase().includes(lowerCaseSearchTerm) // Também pesquisa no preço
+            );
+        }
 
         if (filteredCars.length === 0) {
-            carListingsContainer.innerHTML = '<p>Nenhum carro encontrado para esta categoria.</p>';
+            carListingsContainer.innerHTML = '<p>Nenhum carro encontrado com esses critérios.</p>';
             return;
         }
 
@@ -174,10 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const carCard = document.createElement('div');
             carCard.classList.add('car-card');
 
-            // Mensagem padrão para o WhatsApp, incluindo o título do carro
             const whatsappMessage = `Olá! Tenho interesse no veículo: ${car.title} (${car.details} - ${car.price}). Poderia me dar mais informações?`;
-            
-            // Link do WhatsApp com a mensagem codificada e o número da loja
             const whatsappLink = `https://wa.me/${storeWhatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 
             carCard.innerHTML = `
@@ -192,7 +207,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         </a>
                     </div>
                 </div>
-                
             `;
             carListingsContainer.appendChild(carCard);
         });
@@ -207,10 +221,38 @@ document.addEventListener('DOMContentLoaded', () => {
             event.target.classList.add('active');
 
             const filterType = event.target.dataset.filter;
+            searchInput.value = ''; // Limpa o campo de pesquisa ao usar os botões de filtro
             displayCars(filterType);
         });
     });
 
+    // NOVO: Adiciona event listener para o botão de pesquisa
+    if (searchButton && searchInput) {
+        function handleSearch() {
+            // Remove a classe 'active' de todos os botões de filtro
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            // Adiciona a classe 'active' ao botão "Pesquisar" (se ele for um dos filterButtons)
+            // Ou apenas garante que nenhum filtro de "usado" esteja ativo.
+            // Se você tiver um botão "Pesquisar" na search-options, você pode ativá-lo aqui:
+            // const searchFilterButton = document.querySelector('.search-options button[data-filter="pesquisar"]');
+            // if (searchFilterButton) searchFilterButton.classList.add('active');
+
+            const searchTerm = searchInput.value;
+            // Chama displayCars com 'todos' os tipos, mas com o termo de pesquisa
+            displayCars('todos', searchTerm);
+        }
+
+        searchButton.addEventListener('click', handleSearch);
+
+        // Opcional: Pesquisar ao pressionar Enter no campo de busca
+        searchInput.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                handleSearch();
+            }
+        });
+    }
+
     // Exibir carros inicialmente ao carregar a página
-    displayCars('usado'); // Começa mostrando os carros usados
+    // Pode começar com 'todos' para ver tudo ou 'usado' como antes.
+    displayCars('usado');
 });
