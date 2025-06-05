@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
             image: 'imagens/11.jpg',
             title: 'ONIX JOY 1.0',
             details: '2018 | Manual',
-            price: 'R$ 47.900'
+            price: 'R$ 48.900'
         },
         {
             id: 12,
